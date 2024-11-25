@@ -116,9 +116,14 @@ elif selected == "Insights":
     top_authors = df['authors'].value_counts().head(10)
     st.bar_chart(top_authors)
 
-    # Distribution des notes moyennes avec Plotly
+    # Ajout du curseur pour contrôler le nombre de bins dans l'histogramme
     st.write("## Distribution des notes moyennes")
-    fig = px.histogram(df, x='average_rating', nbins=20, title="Distribution des notes moyennes", labels={'average_rating': 'Note moyenne'})
+
+    # Curseur pour sélectionner le nombre de bins
+    nb_bins = st.slider("Sélectionnez le nombre de barres (bins) pour l'histogramme", min_value=5, max_value=50, value=20, step=1)
+
+    # Création de l'histogramme avec le nombre de bins sélectionné
+    fig = px.histogram(df, x='average_rating', nbins=nb_bins, title="Distribution des notes moyennes", labels={'average_rating': 'Note moyenne'})
     st.plotly_chart(fig)
 
 elif selected == "Prediction":
