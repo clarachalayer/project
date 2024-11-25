@@ -1,7 +1,7 @@
 
 import streamlit as st
 import pandas as pd
-import plotly.express as px
+import plotly
 
 # Configurer la page de l'application
 st.set_page_config(page_title="A Random App", layout="wide")
