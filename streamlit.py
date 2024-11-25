@@ -1,7 +1,6 @@
-
 import streamlit as st
 import pandas as pd
-import plotly
+import plotly.graph_objs as go  # Importer graph_objs pour manipuler les objets de graphique
 
 # Configurer la page de l'application
 st.set_page_config(page_title="A Random App", layout="wide")
@@ -119,7 +118,21 @@ elif selected == "Insights":
 
     # Distribution des notes moyennes avec Plotly
     st.write("## Distribution des notes moyennes")
-    fig = px.histogram(df, x='average_rating', nbins=20, title="Distribution des notes moyennes", labels={'average_rating': 'Note moyenne'})
+
+    # Créer l'histogramme avec plotly directement
+    fig = go.Figure(
+        data=[go.Histogram(x=df['average_rating'], nbinsx=20)]
+    )
+
+    # Mettre à jour les titres et les labels
+    fig.update_layout(
+        title="Distribution des notes moyennes",
+        xaxis_title="Note moyenne",
+        yaxis_title="Nombre de livres",
+        bargap=0.1,  # Ajuster l'écart entre les barres
+    )
+
+    # Afficher le graphique dans Streamlit
     st.plotly_chart(fig)
 
 elif selected == "Prediction":
